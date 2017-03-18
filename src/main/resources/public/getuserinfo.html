@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="js/jquery-1.10.2.min.js"></script>
+<title>Demo</title>
+</head>
+<body>
+	<div id="console1"></div>
+	<div id="console2"></div>
+	<script>
+		var token;
+		//alert('');
+		$(function() {
+			$
+					.ajax({
+						method : 'GET',
+						url : '/api/getuserinfo',
+						cache : 'false',
+						dataType : 'json',
+
+						//beforeSend:function(xhr){
+						//	xhr.setRequestHeader('X-Authorization', "");
+						//	},
+						headers : {
+							'XK-Autho1.0.0' : 'XKauthHeader eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YW5oYWl4dW5AMzYwc2VyLmNvbSIsInNjb3BlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9QUkVNSVVNX01FTUJFUiJdLCJpc3MiOiJodHRwOi8vMzYwc2VyLmNvbSIsImlhdCI6MTQ4OTgxMTc0NSwiZXhwIjoxNDg5ODEyNjQ1fQ.0c_5VJmbHKrDsvf4paaR-8hMbw_zWyO15DiN9neiOEYBydSeI6801D58FhXCd0AVMwUyj0Sd-aDNl0VDEKK71A'
+						},
+						success : function(data) {
+							$('#console1').text('username：' + data.username);
+							$('#console2').text('authorities：' + data.authorities);
+							token = data;
+						}
+					});
+		});
+	</script>
+</body>
+</html>
