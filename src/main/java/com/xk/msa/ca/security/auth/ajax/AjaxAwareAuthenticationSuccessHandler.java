@@ -37,11 +37,7 @@ public class AjaxAwareAuthenticationSuccessHandler implements AuthenticationSucc
 		this.mapper = mapper;
 		this.tokenFactory = tokenFactory;
 	}
-
-	/**
-	 * 在成功验证委托创建JWT令牌的是在* AjaxAwareAuthenticationSuccessHandler* 中实现
-	 * 这个类的责任是添加JSON载荷包含JWT访问和刷新令牌到HTTP响应的body
-	 */
+ 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {

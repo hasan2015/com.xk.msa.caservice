@@ -1,6 +1,5 @@
 package com.xk.msa.ca.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +22,7 @@ public class UserRole {
 	private String id;
 	private User user;
 	private Role role;
+
 	/**
 	 * @return the id
 	 */
@@ -33,12 +32,15 @@ public class UserRole {
 	public String getId() {
 		return id;
 	}
+
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	/**
 	 * @return the user
 	 */
@@ -47,12 +49,15 @@ public class UserRole {
 	public User getUser() {
 		return user;
 	}
+
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	/**
 	 * @return the role
 	 */
@@ -61,11 +66,13 @@ public class UserRole {
 	public Role getRole() {
 		return role;
 	}
+
 	/**
-	 * @param role the role to set
+	 * @param role
+	 *            the role to set
 	 */
 	public void setRole(Role role) {
 		this.role = role;
 	}
- 
+
 }
