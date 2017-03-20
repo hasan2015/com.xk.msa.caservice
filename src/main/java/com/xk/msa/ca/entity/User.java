@@ -1,15 +1,20 @@
 package com.xk.msa.ca.entity;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 /**
  * 
  * @author yanhaixun
@@ -17,44 +22,73 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="APP_USER")
+@Table(name = "sysuser")
 public class User {
-    @Id @Column(name="ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column(name="username")
-    private String username;
-    
-    @Column(name="password")
-    private String password;
-    
-    @OneToMany
-    @JoinColumn(name="APP_USER_ID", referencedColumnName="ID")
-    private List<UserRole> roles;
-    
-    public User() { }
-    
-    public User(Long id, String username, String password, List<UserRole> roles) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
-    }
+	private String id;
+	private String username;
+	private String password;
+	private Set<UserRole> userroles = new HashSet<UserRole>(0);
 
-    public Long getId() {
-        return id;
-    }
+	public User() {
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public User(String id, String username, String password) {
+		this.id = id;
+		this.username = username;
+		this.password = password; 
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	@Id
+	@Column(name = "userid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public String getId() {
+		return id;
+	}
 
-    public List<UserRole> getRoles() {
-        return roles;
-    }
+	@Column(name = "loginname")
+	public String getUsername() {
+		return username;
+	}
+
+	@Column(name = "Password")
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @return the userroles
+	 */
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<UserRole> getUserroles() {
+		return userroles;
+	}
+
+	/**
+	 * @param userroles the userroles to set
+	 */
+	public void setUserroles(Set<UserRole> userroles) {
+		this.userroles = userroles;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+ 
 }

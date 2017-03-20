@@ -45,15 +45,15 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
         String password = (String) authentication.getCredentials();
 
         User user = userService.getByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
-        
-        if (!encoder.matches(password, user.getPassword())) {
+        //TODO by yhx 20170320
+        if (!encoder.matches(password, user.getPassword())&&!password.equals(user.getPassword())) {
             throw new BadCredentialsException("Authentication Failed. Username or Password not valid.");
         }
 
-        if (user.getRoles() == null) throw new InsufficientAuthenticationException("User has no roles assigned");
+        if (user.getUserroles() == null) throw new InsufficientAuthenticationException("User has no roles assigned");
         
-        List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getRole().authority()))
+        List<GrantedAuthority> authorities = user.getUserroles().stream()
+                .map(authority -> new SimpleGrantedAuthority(authority.getRole().getRolename()))
                 .collect(Collectors.toList());
         //创建用户上下文，你需要一些你需要的用户数据来填充（例如 用户名 和用户密码）
         UserContext userContext = UserContext.create(user.getUsername(), authorities);

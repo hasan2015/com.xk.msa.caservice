@@ -1,14 +1,17 @@
 package com.xk.msa.ca.entity;
 
-import java.io.Serializable;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 /**
  * 
  * @author yanhaixun
@@ -16,35 +19,53 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "USER_ROLE")
+@Table(name = "sysuserrole")
 public class UserRole {
-    @Embeddable
-    public static class Id implements Serializable {
-        private static final long serialVersionUID = 1322120000551624359L;
-        
-        @Column(name = "APP_USER_ID")
-        protected Long userId;
-        
-        @Enumerated(EnumType.STRING)
-        @Column(name = "ROLE")
-        protected Role role;
-        
-        public Id() { }
-
-        public Id(Long userId, Role role) {
-            this.userId = userId;
-            this.role = role;
-        }
-    }
-    
-    @EmbeddedId
-    Id id = new Id();
-    
-    @Enumerated(EnumType.STRING)
-    @Column(name = "ROLE", insertable=false, updatable=false)
-    protected Role role;
-
-    public Role getRole() {
-        return role;
-    }
+	private String id;
+	private User user;
+	private Role role;
+	/**
+	 * @return the id
+	 */
+	@Id
+	@Column(name = "userroleid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public String getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+	/**
+	 * @return the user
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userid")
+	public User getUser() {
+		return user;
+	}
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
+	}
+	/**
+	 * @return the role
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "roleid")
+	public Role getRole() {
+		return role;
+	}
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(Role role) {
+		this.role = role;
+	}
+ 
 }

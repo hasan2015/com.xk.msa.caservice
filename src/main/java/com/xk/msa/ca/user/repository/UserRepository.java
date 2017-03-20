@@ -14,6 +14,6 @@ import com.xk.msa.ca.entity.User;
  *
  */
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query("select u from User u left join fetch u.roles r where u.username=:username")
+    @Query("select u from User u left join fetch u.userroles r where u.username=:username")
     public Optional<User> findByUsername(@Param("username") String username);
 }
