@@ -15,7 +15,7 @@
 			$
 					.ajax({
 						method : 'GET',
-						url : 'http://192.168.6.109:9966/api/getuserinfo',
+						url : '/api/getuserinfo',
 						cache : 'false',
 						dataType : 'json',
 
@@ -23,7 +23,7 @@
 						//	xhr.setRequestHeader('X-Authorization', "");
 						//	},
 						headers : {
-							'XK-Autho1.0.0' : 'XKauthHeader eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkAxMDEiLCJzY29wZXMiOlsi57O757uf566h55CG5ZGYIl0sImlzcyI6Imh0dHA6Ly8zNjBzZXIuY29tIiwiaWF0IjoxNDg5OTkxNzE5LCJleHAiOjE0ODk5OTI2MTl9.bQnGYGCc2bNaWgnnagne7nDnSR8QC-hIzTd2_FrHrKyxcYjd4Rzk3XGWzqPIrWOGSxHFQlMAeGr2XBsTG4zd8w'
+							'XK-Autho1.0.0' : 'XKauthHeader eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkAxMDEiLCJzY29wZXMiOlsi57O757uf566h55CG5ZGYIl0sImlzcyI6Imh0dHA6Ly8zNjBzZXIuY29tIiwiaWF0IjoxNDg5OTk3ODA1LCJleHAiOjE0ODk5OTg3MDV9.eBsbERfQvnwrJ34oG0O7kO5OaZPaEEJhLzYiOiHizph9-mPOuIdmPZhbhSLjkqgvFMDiFPeTqbWQIe8jxNhlnA'
 						},
 						success : function(data) {
 							$('#console1').text('username：' + data.username);

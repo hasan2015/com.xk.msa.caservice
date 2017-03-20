@@ -24,6 +24,7 @@ import javax.persistence.Table;
 public class Role {
 	private String id;
 	private String rolename;
+	private String tenantid;
 	private Set<UserRole> userroles = new HashSet<UserRole>(0);
 
 	public Role() {
@@ -78,6 +79,21 @@ public class Role {
 	 */
 	public void setUserroles(Set<UserRole> userroles) {
 		this.userroles = userroles;
+	}
+
+	/**
+	 * @return the tenantid
+	 */
+	@Column(name = "tenantid")
+	public String getTenantid() {
+		return tenantid;
+	}
+
+	/**
+	 * @param tenantid the tenantid to set
+	 */
+	public void setTenantid(String tenantid) {
+		this.tenantid = tenantid;
 	}
 
 }
