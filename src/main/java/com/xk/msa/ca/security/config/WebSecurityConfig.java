@@ -15,6 +15,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xk.msa.ca.security.RestAuthenticationEntryPoint;
@@ -81,6 +84,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+//        .requestMatchers().antMatchers(HttpMethod.OPTIONS, "/api/oauth/token", "/rest/**", "/api/**", "/**")
+//        .and()
         .csrf().disable() // We don't need CSRF for JWT based authentication
         .exceptionHandling()
         .authenticationEntryPoint(this.authenticationEntryPoint)
@@ -101,4 +106,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilterBefore(buildAjaxLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(buildJwtTokenAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurerAdapter() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/api/xkauth/login").allowedOrigins("http://192.168.6.109:9966");
+//            }
+//        };
+//    }
 }
