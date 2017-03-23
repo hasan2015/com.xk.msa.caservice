@@ -1,21 +1,21 @@
-server.port: 9966
-spring.profiles: default
-xk.msa.ca.security.jwt:
-  tokenExpirationTime: 15 # Number of minutes
-  refreshTokenExpTime: 60 # Minutes
-  tokenIssuer: http://360ser.com
-  tokenSigningKey: xkhasanxm8EV6Hy5RMFK4EEACIDAwQus
+server.port: 2003 # registry=2001;config=2002;ca=2003;api.port=21**;ui.port=22**
+#spring.profiles: default
+#xk.msa.ca.security.jwt:
+#  tokenExpirationTime: 15 # Number of minutes
+#  refreshTokenExpTime: 60 # Minutes
+#  tokenIssuer: http://360ser.com
+#  tokenSigningKey: xkhasanxm8EV6Hy5RMFK4EEACIDAwQus
   
 #spring.datasource: 
 #  url: jdbc:mysql://192.168.118.10:3306/testsm?useUnicode=true&useSSL=false
 #  username: root
 #  password: "!Qaz2wsx"
 #  driver-class-name: com.mysql.jdbc.Driver
-spring.datasource: 
-  url: jdbc:jtds:sqlserver://sp502876b549535.sqlserver.rds.aliyuncs.com:3433;DatabaseName=yhxsr
-  username: yhxprivate
-  password: "yhx@Private"
-  driver-class-name: net.sourceforge.jtds.jdbc.Driver
+#spring.datasource: 
+#  url: jdbc:jtds:sqlserver://sp502876b549535.sqlserver.rds.aliyuncs.com:3433;DatabaseName=yhxsr
+#  username: yhxprivate
+#  password: "yhx@Private"
+#  driver-class-name: net.sourceforge.jtds.jdbc.Driver
 
   
   

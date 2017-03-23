@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,9 +37,11 @@ import com.xk.msa.ca.security.auth.jwt.extractor.TokenExtractor;
  */
 public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String JWT_TOKEN_HEADER_PARAM = "XK-Autho1.0.0";
-    public static final String FORM_BASED_LOGIN_ENTRY_POINT = "/api/xkauth/login";
+    @Value("${com.xk.msa.caservice.url.login}")
+    public  String FORM_BASED_LOGIN_ENTRY_POINT;// = "/api/xkauth/login";
     public static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/api/**";
-    public static final String TOKEN_REFRESH_ENTRY_POINT = "/api/xkauth/token";
+    @Value("${com.xk.msa.caservice.url.refreshtoken}")
+    public String TOKEN_REFRESH_ENTRY_POINT ;//= "/api/xkauth/token";
     
     @Autowired private RestAuthenticationEntryPoint authenticationEntryPoint;
     @Autowired private AuthenticationSuccessHandler successHandler;
@@ -86,21 +89,28 @@ public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAda
 //        .and()
         .csrf().disable() // We don't need CSRF for JWT based authentication
         .exceptionHandling()
-        .authenticationEntryPoint(this.authenticationEntryPoint)
-        
+        .authenticationEntryPoint(this.authenticationEntryPoint)        
         .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
         .and()
             .authorizeRequests()
-                .antMatchers(FORM_BASED_LOGIN_ENTRY_POINT).permitAll() // Login end-point
+//                .antMatchers(FORM_BASED_LOGIN_ENTRY_POINT).permitAll() // Login end-point
                 .antMatchers(TOKEN_REFRESH_ENTRY_POINT).permitAll() // Token refresh end-point
                 .antMatchers("/console").permitAll() // H2 Console Dash-board - only for testing
         .and()
+            .formLogin()
+                .loginPage(FORM_BASED_LOGIN_ENTRY_POINT)
+                .permitAll()
+        .and()
+            .logout()
+                .permitAll()                
+        .and()
             .authorizeRequests()
                 .antMatchers(TOKEN_BASED_AUTH_ENTRY_POINT).authenticated(); // Protected API End-points
+        
         setupAuthorization(http);
+        
         http
         .addFilterBefore(buildAjaxLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
         .addFilterBefore(buildJwtTokenAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);

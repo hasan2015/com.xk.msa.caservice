@@ -18,7 +18,9 @@ public class WebSecurityConfig extends AbstractWebSecurityConfig {
 		http.authorizeRequests()
 				// allow anonymous access to /authenticate endpoint
 				.antMatchers("/authenticate").permitAll()
-
+				
+//	                .antMatchers("/", "/home").permitAll()
+//	                .anyRequest().authenticated()
 				// allow anonymous to common static resources
 //				.antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js")
 				 

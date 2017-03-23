@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
 <meta charset="UTF-8">
 <script src="js/jquery-1.10.2.min.js"></script>
@@ -8,6 +8,7 @@
 <body>
 	<div id="console1"></div>
 	<div id="console2"></div>
+ 
 	<script>
 		var token;
 		//alert('');
@@ -20,7 +21,7 @@
 				contentType : 'application/json',
 				data : '{"username":"admin@101","password":"62C8AD0A15D9D1CA38D5DEE762A16E01"}',
 				headers : {
-					'Service-Name' : 'com.xk.msa.api.cr.hello'
+					'Service-Name' : 'com.xk.msa.caservice'
 				},
 				success : function(data) {
 					$('#console1').text('token：' + data.token);

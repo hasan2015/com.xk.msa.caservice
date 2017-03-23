@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @date 2017年3月18日 下午12:29:49
  *
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.xk.msa")
 @EnableConfigurationProperties
 public class Application {
 	public static void main(String[] args) {
