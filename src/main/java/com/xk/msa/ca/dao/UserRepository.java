@@ -1,4 +1,4 @@
-package com.xk.msa.ca.user.repository;
+package com.xk.msa.ca.dao;
 
 import java.util.Optional;
 

@@ -19,7 +19,7 @@ import org.springframework.util.Assert;
 
 import com.xk.msa.ca.entity.User;
 import com.xk.msa.ca.security.model.UserContext;
-import com.xk.msa.ca.user.service.DatabaseUserService;
+import com.xk.msa.ca.service.DatabaseUserService;
 /**
  * 
  * @author yanhaixun

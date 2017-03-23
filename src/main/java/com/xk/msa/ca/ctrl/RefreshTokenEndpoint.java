@@ -1,4 +1,4 @@
-package com.xk.msa.ca.security.endpoint;
+package com.xk.msa.ca.ctrl;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xk.msa.ca.entity.User;
-import com.xk.msa.ca.security.UserService;
 import com.xk.msa.ca.security.auth.jwt.extractor.TokenExtractor;
 import com.xk.msa.ca.security.auth.jwt.verifier.TokenVerifier;
 import com.xk.msa.ca.security.config.JwtSettings;
@@ -33,6 +32,7 @@ import com.xk.msa.ca.security.model.token.JwtToken;
 import com.xk.msa.ca.security.model.token.JwtTokenFactory;
 import com.xk.msa.ca.security.model.token.RawAccessJwtToken;
 import com.xk.msa.ca.security.model.token.RefreshToken;
+import com.xk.msa.ca.service.UserService;
 /**
  * 
  * @author yanhaixun

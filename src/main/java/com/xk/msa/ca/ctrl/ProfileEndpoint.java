@@ -1,4 +1,4 @@
-package com.xk.msa.ca.profile.endpoint;
+package com.xk.msa.ca.ctrl;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
