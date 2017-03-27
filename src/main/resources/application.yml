@@ -1,4 +1,4 @@
-server.port: 2003 # registry=2001;config=2002;ca=2003;api.port=21**;ui.port=22**
+server.port: 2003 # 2BCD:2001=ZK;2002=CONF;2003=CA;3BCD=API;4BCD=UI
 #spring.profiles: default
 #xk.msa.ca.security.jwt:
 #  tokenExpirationTime: 15 # Number of minutes

@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xk.msa.ca.common.WebUtil;
+import com.xk.msa.ca.security.common.WebUtil;
 import com.xk.msa.ca.security.exceptions.AuthMethodNotSupportedException;
  
 /**

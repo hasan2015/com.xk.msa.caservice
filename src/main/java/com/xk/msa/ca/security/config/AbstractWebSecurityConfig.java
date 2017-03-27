@@ -6,24 +6,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xk.msa.ca.security.RestAuthenticationEntryPoint;
-import com.xk.msa.ca.security.auth.ajax.AjaxAuthenticationProvider;
-import com.xk.msa.ca.security.auth.ajax.AjaxLoginProcessingFilter;
+//import com.xk.msa.ca.security.auth.ajax.AjaxAuthenticationProvider;
+//import com.xk.msa.ca.security.auth.ajax.AjaxLoginProcessingFilter;
 import com.xk.msa.ca.security.auth.jwt.JwtAuthenticationProvider;
 import com.xk.msa.ca.security.auth.jwt.JwtTokenAuthenticationProcessingFilter;
 import com.xk.msa.ca.security.auth.jwt.SkipPathRequestMatcher;
@@ -36,17 +30,25 @@ import com.xk.msa.ca.security.auth.jwt.extractor.TokenExtractor;
  *
  */
 public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAdapter {
-    public static final String JWT_TOKEN_HEADER_PARAM = "XK-Autho1.0.0";
-    @Value("${com.xk.msa.caservice.url.login}")
-    public  String FORM_BASED_LOGIN_ENTRY_POINT;// = "/api/xkauth/login";
-    public static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/api/**";
-    @Value("${com.xk.msa.caservice.url.refreshtoken}")
-    public String TOKEN_REFRESH_ENTRY_POINT ;//= "/api/xkauth/token";
+//    public static final String JWT_TOKEN_HEADER_PARAM = "XK-Autho1.0.0";
+//    @Value("${com.xk.msa.ca.url.login}")
+//    public  String FORM_BASED_LOGIN_ENTRY_POINT;// = "/api/xkauth/login";
+//    public static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/api/**";
+//    @Value("${com.xk.msa.ca.url.refreshtoken}")
+//    public String TOKEN_REFRESH_ENTRY_POINT ;//= "/api/xkauth/token";
+	@Value("${com.xk.msa.security.jwt.tokenHeader}")
+    private String JWT_TOKEN_HEADER_PARAM;
+	@Value("${com.xk.msa.security.jwt.tokenBasedAuthEntryPoint}")
+    private String TOKEN_BASED_AUTH_ENTRY_POINT;
+	@Value("${com.xk.msa.security.jwt.tokenFormBasedLoginEntryPoint}")
+    private String FORM_BASED_LOGIN_ENTRY_POINT;
+	@Value("${com.xk.msa.security.jwt.tokenRefreshAuthEntryPoint}")
+    private String TOKEN_REFRESH_ENTRY_POINT;
     
     @Autowired private RestAuthenticationEntryPoint authenticationEntryPoint;
-    @Autowired private AuthenticationSuccessHandler successHandler;
+//    @Autowired private AuthenticationSuccessHandler successHandler;
     @Autowired private AuthenticationFailureHandler failureHandler;
-    @Autowired private AjaxAuthenticationProvider ajaxAuthenticationProvider;
+//    @Autowired private AjaxAuthenticationProvider ajaxAuthenticationProvider;
     @Autowired private JwtAuthenticationProvider jwtAuthenticationProvider;
     
     @Autowired private TokenExtractor tokenExtractor;
@@ -55,11 +57,11 @@ public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAda
     
     @Autowired private ObjectMapper objectMapper;
         
-    protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter() throws Exception {
-        AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(FORM_BASED_LOGIN_ENTRY_POINT, successHandler, failureHandler, objectMapper);
-        filter.setAuthenticationManager(this.authenticationManager);
-        return filter;
-    }
+//    protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter() throws Exception {
+//        AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(FORM_BASED_LOGIN_ENTRY_POINT, successHandler, failureHandler, objectMapper);
+//        filter.setAuthenticationManager(this.authenticationManager);
+//        return filter;
+//    }
     
     protected JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter() throws Exception {
         List<String> pathsToSkip = Arrays.asList(TOKEN_REFRESH_ENTRY_POINT, FORM_BASED_LOGIN_ENTRY_POINT);
@@ -78,7 +80,7 @@ public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAda
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(ajaxAuthenticationProvider);
+//        auth.authenticationProvider(ajaxAuthenticationProvider);
         auth.authenticationProvider(jwtAuthenticationProvider);
     }
 
@@ -93,26 +95,12 @@ public abstract class AbstractWebSecurityConfig extends WebSecurityConfigurerAda
         .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-            .authorizeRequests()
-//                .antMatchers(FORM_BASED_LOGIN_ENTRY_POINT).permitAll() // Login end-point
-                .antMatchers(TOKEN_REFRESH_ENTRY_POINT).permitAll() // Token refresh end-point
-                .antMatchers("/console").permitAll() // H2 Console Dash-board - only for testing
-        .and()
-            .formLogin()
-                .loginPage(FORM_BASED_LOGIN_ENTRY_POINT)
-                .permitAll()
-        .and()
-            .logout()
-                .permitAll()                
-        .and()
-            .authorizeRequests()
-                .antMatchers(TOKEN_BASED_AUTH_ENTRY_POINT).authenticated(); // Protected API End-points
+        ; // Protected API End-points
         
         setupAuthorization(http);
         
         http
-        .addFilterBefore(buildAjaxLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
+//        .addFilterBefore(buildAjaxLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
         .addFilterBefore(buildJwtTokenAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);
        
 

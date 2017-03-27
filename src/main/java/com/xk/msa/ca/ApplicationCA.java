@@ -13,8 +13,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  */
 @SpringBootApplication(scanBasePackages = "com.xk.msa")
 @EnableConfigurationProperties
-public class Application {
+public class ApplicationCA {
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(ApplicationCA.class, args);
 	}
 }

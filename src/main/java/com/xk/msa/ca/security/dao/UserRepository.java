@@ -1,4 +1,4 @@
-package com.xk.msa.ca.dao;
+package com.xk.msa.ca.security.dao;
 
 import java.util.Optional;
 
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.xk.msa.ca.entity.User;
+import com.xk.msa.ca.security.entity.User;
 /**
  * 
  * @author yanhaixun

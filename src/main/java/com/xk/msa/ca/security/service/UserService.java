@@ -1,8 +1,8 @@
-package com.xk.msa.ca.service;
+package com.xk.msa.ca.security.service;
 
 import java.util.Optional;
 
-import com.xk.msa.ca.entity.User;
+import com.xk.msa.ca.security.entity.User;
 
 /**
  * 

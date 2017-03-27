@@ -15,8 +15,8 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xk.msa.ca.common.ErrorCode;
-import com.xk.msa.ca.common.ErrorResponse;
+import com.xk.msa.ca.security.common.ErrorCode;
+import com.xk.msa.ca.security.common.ErrorResponse;
 import com.xk.msa.ca.security.exceptions.AuthMethodNotSupportedException;
 import com.xk.msa.ca.security.exceptions.JwtExpiredTokenException;
 /**

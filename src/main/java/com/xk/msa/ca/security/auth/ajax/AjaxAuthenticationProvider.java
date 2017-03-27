@@ -17,9 +17,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import com.xk.msa.ca.entity.User;
+import com.xk.msa.ca.security.entity.User;
+import com.xk.msa.ca.security.service.DatabaseUserService;
 import com.xk.msa.ca.security.model.UserContext;
-import com.xk.msa.ca.service.DatabaseUserService;
 /**
  * 
  * @author yanhaixun

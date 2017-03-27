@@ -1,4 +1,4 @@
-package com.xk.msa.ca.common;
+package com.xk.msa.ca.security.common;
 
 import com.fasterxml.jackson.annotation.JsonValue;
  

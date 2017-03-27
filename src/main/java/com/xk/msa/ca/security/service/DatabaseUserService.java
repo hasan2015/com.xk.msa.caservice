@@ -1,12 +1,12 @@
-package com.xk.msa.ca.service;
+package com.xk.msa.ca.security.service;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xk.msa.ca.dao.UserRepository;
-import com.xk.msa.ca.entity.User;
+import com.xk.msa.ca.security.dao.UserRepository;
+import com.xk.msa.ca.security.entity.User;
 
 /**
  * 

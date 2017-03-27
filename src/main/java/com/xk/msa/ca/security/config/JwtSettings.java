@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-@ConfigurationProperties(prefix = "xk.msa.ca.security.jwt")
+@ConfigurationProperties(prefix = "com.xk.msa.security.jwt")
 public class JwtSettings {
     /**
      * {@link JwtToken} will expire after this time.
@@ -61,4 +61,6 @@ public class JwtSettings {
     public void setTokenSigningKey(String tokenSigningKey) {
         this.tokenSigningKey = tokenSigningKey;
     }
+
+    
 }

@@ -1,16 +1,16 @@
-package com.xk.msa.ca.ctrl;
+package com.xk.msa.ca.security.ctrl;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
@@ -22,18 +22,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xk.msa.ca.entity.User;
+import com.xk.msa.ca.security.config.WebSecurityConfig;
+import com.xk.msa.ca.security.entity.User;
+import com.xk.msa.ca.security.service.UserService;
 import com.xk.msa.ca.security.auth.jwt.extractor.TokenExtractor;
 import com.xk.msa.ca.security.auth.jwt.verifier.TokenVerifier;
 import com.xk.msa.ca.security.config.JwtSettings;
-import com.xk.msa.ca.security.config.WebSecurityConfig;
 import com.xk.msa.ca.security.exceptions.InvalidJwtToken;
 import com.xk.msa.ca.security.model.UserContext;
 import com.xk.msa.ca.security.model.token.JwtToken;
 import com.xk.msa.ca.security.model.token.JwtTokenFactory;
 import com.xk.msa.ca.security.model.token.RawAccessJwtToken;
 import com.xk.msa.ca.security.model.token.RefreshToken;
-import com.xk.msa.ca.service.UserService;
 /**
  * 
  * @author yanhaixun
@@ -48,10 +48,12 @@ public class RefreshTokenEndpoint {
     @Autowired private UserService userService;
     @Autowired private TokenVerifier tokenVerifier;
     @Autowired @Qualifier("jwtHeaderTokenExtractor") private TokenExtractor tokenExtractor;
+	@Value("${com.xk.msa.security.jwt.tokenHeader}")
+    private String JWT_TOKEN_HEADER_PARAM;
     
-    @RequestMapping(name = "com.xk.msa.api.ca.refreshtoken",value="/api/xkauth/token", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(name = "com.xk.msa.ca",value="/api/xkauth/token", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public @ResponseBody JwtToken refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String tokenPayload = tokenExtractor.extract(request.getHeader(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM));
+        String tokenPayload = tokenExtractor.extract(request.getHeader(JWT_TOKEN_HEADER_PARAM));
         
         RawAccessJwtToken rawToken = new RawAccessJwtToken(tokenPayload);
         RefreshToken refreshToken = RefreshToken.create(rawToken, jwtSettings.getTokenSigningKey()).orElseThrow(() -> new InvalidJwtToken());

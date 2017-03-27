@@ -1,4 +1,4 @@
-package com.xk.msa.ca.ctrl;
+package com.xk.msa.ca.security.ctrl;
 
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ import com.xk.msa.ca.security.model.UserContext;
 @RestController
 @RefreshScope
 public class ProfileEndpoint {
-	@RequestMapping(name = "com.xk.msa.caservice",value = "/api/getuserinfo", method = RequestMethod.GET)
+	@RequestMapping(name = "com.xk.msa.ca",value = "/api/getuserinfo", method = RequestMethod.GET)
 	public @ResponseBody UserContext get(JwtAuthenticationToken token) {
 		return (UserContext) token.getPrincipal();
 	}

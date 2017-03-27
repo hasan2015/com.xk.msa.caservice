@@ -1,4 +1,4 @@
-package com.xk.msa.ca.entity;
+package com.xk.msa.ca.security.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
